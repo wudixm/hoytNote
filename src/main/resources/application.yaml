@@ -1,1 +1,8 @@
 indexPath: "/Users/wuxiaoming/IdeaProjects/hoytNote/index"
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/note
+    username: root
+    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
