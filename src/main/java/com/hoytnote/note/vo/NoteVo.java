@@ -88,4 +88,17 @@ public class NoteVo {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
+	public String toString() {
+		return "NoteVo{" +
+				"id=" + id +
+				", userId=" + userId +
+				", categoryId=" + categoryId +
+				", title='" + title + '\'' +
+				", content='" + content + '\'' +
+				", properties='" + properties + '\'' +
+				", createdAt=" + createdAt +
+				", updatedAt=" + updatedAt +
+				'}';
+	}
 }

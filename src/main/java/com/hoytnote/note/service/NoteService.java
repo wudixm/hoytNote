@@ -11,6 +11,7 @@ public interface NoteService {
 	void delete(Long id);
 	NoteVo get(Long id);
 	List<NoteVo> getAll();
+	List<NoteVo> getByUserIdCategoryId(Long userId, Long categoryId);
 
 }
 

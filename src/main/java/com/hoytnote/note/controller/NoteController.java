@@ -7,15 +7,7 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hoytnote.note.service.NoteService;
 import com.hoytnote.note.vo.NoteVo;
@@ -41,7 +33,13 @@ public class NoteController {
 	public List<NoteVo>  getAll() {
 		return noteService.getAll();
 	}
-	
+
+	@GetMapping("note/user")
+	public List<NoteVo>  getUserCategoryAll(@RequestParam Long categoryId,
+											@RequestParam Long userId) {
+		return noteService.getByUserIdCategoryId(userId, categoryId);
+	}
+
 	@PutMapping("note")
 	public void update(NoteVo noteVo) {
 		noteService.update(noteVo);

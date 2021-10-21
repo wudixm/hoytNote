@@ -8,6 +8,7 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import com.hoytnote.note.tools.BeanTools;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +43,11 @@ public class NoteServiceImpl implements NoteService {
 	@Transactional
 	public void update(NoteVo noteVo) {
 		Long id = noteVo.getId();
-		Boolean objectExists=noteDao.existsById(id);
-		if(objectExists) {
-			Note note = new Note();
-			BeanUtils.copyProperties(noteVo, note);
+		Optional<Note> noteOptional = noteDao.findById(id);
+		if(noteOptional.isPresent()) {
+			Note note = noteOptional.get();
+			BeanTools.myCopyProperties(noteVo, note);
+//			BeanUtils.copyProperties(noteVo, note);
 			noteDao.save(note);
 		}else {
 			throw new EntityNotFoundException();
@@ -92,6 +94,20 @@ public class NoteServiceImpl implements NoteService {
 		}
 		return noteVoList;
 	}
+	@Transactional
+	public List<NoteVo> getByUserIdCategoryId(Long userId, Long categoryId) {
+		List<Note> noteList = noteDao.findByUserIDCategoryId(userId, categoryId);
+		List<NoteVo> noteVoList = new ArrayList<>();
+		if (noteList != null && !noteList.isEmpty()) {
+			for (Note note : noteList) {
+				NoteVo noteVo = new NoteVo();
+				BeanUtils.copyProperties(note, noteVo);
+				noteVoList.add(noteVo);
+			}
+		}
+		return noteVoList;
+	}
+
 
 }
 
