@@ -1,16 +1,17 @@
 package com.hoytnote.note.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="note")
 public class Note {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id ;
 
@@ -30,10 +31,12 @@ public class Note {
 	private String properties ;
 
 	@Column(name="created_at")
-	private Date createdAt ;
+	@CreationTimestamp
+	private LocalDateTime createdAt ;
 
 	@Column(name="updated_at")
-	private Date updatedAt ;
+	@UpdateTimestamp
+	private LocalDateTime updatedAt ;
 
 	public Note(){
 		super();
@@ -87,19 +90,19 @@ public class Note {
 		this.properties = properties;
 	}
 
-	public Date getCreatedAt(){
+	public LocalDateTime getCreatedAt(){
 		return this.createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt){
+	public void setCreatedAt(LocalDateTime createdAt){
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt(){
+	public LocalDateTime getUpdatedAt(){
 		return this.updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt){
+	public void setUpdatedAt(LocalDateTime updatedAt){
 		this.updatedAt = updatedAt;
 	}
 

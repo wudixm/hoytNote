@@ -26,17 +26,10 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	@Transactional
-	public void save(NoteVo noteVo) {	
-		Long id = noteVo.getId();
-		Boolean objectAlreadyExists=noteDao.existsById(id);
-		if(!objectAlreadyExists) {
-			Note note = new Note();
-			BeanUtils.copyProperties(noteVo, note);
-			noteDao.save(note);
-		}else {
-			throw new EntityExistsException();
-		}
-		
+	public void save(NoteVo noteVo) {
+		Note note = new Note();
+		BeanTools.myCopyProperties(noteVo, note);
+		noteDao.save(note);
 	}
 	
 	@Override

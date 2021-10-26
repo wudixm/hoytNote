@@ -1,6 +1,6 @@
 package com.hoytnote.note.vo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class NoteVo {
 
@@ -16,9 +16,9 @@ public class NoteVo {
 
 	private String properties ;
 
-	private Date createdAt ;
+	private LocalDateTime createdAt ;
 
-	private Date updatedAt ;
+	private LocalDateTime updatedAt ;
 
 	public NoteVo(){
 		super();
@@ -72,19 +72,19 @@ public class NoteVo {
 		this.properties = properties;
 	}
 
-	public Date getCreatedAt(){
+	public LocalDateTime getCreatedAt(){
 		return this.createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt){
+	public void setCreatedAt(LocalDateTime createdAt){
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt(){
+	public LocalDateTime getUpdatedAt(){
 		return this.updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt){
+	public void setUpdatedAt(LocalDateTime updatedAt){
 		this.updatedAt = updatedAt;
 	}
 
