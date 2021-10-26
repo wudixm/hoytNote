@@ -1,5 +1,7 @@
 package com.hoytnote.note.vo;
 
+import java.time.LocalDateTime;
+
 public class UserCategoryVo {
 
 	private Long id ;
@@ -10,9 +12,9 @@ public class UserCategoryVo {
 
 	private String properties ;
 
-	private String createdAt ;
+	private LocalDateTime createdAt ;
 
-	private String updatedAt ;
+	private LocalDateTime updatedAt ;
 
 	public UserCategoryVo(){
 		super();
@@ -50,19 +52,19 @@ public class UserCategoryVo {
 		this.properties = properties;
 	}
 
-	public String getCreatedAt(){
+	public LocalDateTime getCreatedAt(){
 		return this.createdAt;
 	}
 
-	public void setCreatedAt(String createdAt){
+	public void setCreatedAt(LocalDateTime createdAt){
 		this.createdAt = createdAt;
 	}
 
-	public String getUpdatedAt(){
+	public LocalDateTime getUpdatedAt(){
 		return this.updatedAt;
 	}
 
-	public void setUpdatedAt(String updatedAt){
+	public void setUpdatedAt(LocalDateTime updatedAt){
 		this.updatedAt = updatedAt;
 	}
 

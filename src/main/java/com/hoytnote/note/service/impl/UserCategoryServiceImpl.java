@@ -8,8 +8,11 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import com.hoytnote.note.tools.BeanTools;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.hoytnote.note.dao.UserCategoryDao;
@@ -17,6 +20,7 @@ import com.hoytnote.note.entity.UserCategory;
 import com.hoytnote.note.service.UserCategoryService;
 import com.hoytnote.note.vo.UserCategoryVo;
 
+@Slf4j
 @Service
 public class UserCategoryServiceImpl implements UserCategoryService {
 
@@ -27,15 +31,20 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 	@Transactional
 	public void save(UserCategoryVo userCategoryVo) {	
 		Long id = userCategoryVo.getId();
-		Boolean objectAlreadyExists=userCategoryDao.existsById(id);
-		if(!objectAlreadyExists) {
+		Optional<List<UserCategory>> userCategoryByName = userCategoryDao.findUserCategoryByName(userCategoryVo.getUserId(), userCategoryVo.getName());
+		if (userCategoryByName.isPresent()) {
+			log.info("is Present");
+			List<UserCategory> userCategories = userCategoryByName.get();
+			log.info("is Present size is " + userCategories.size());
+			if (userCategories.size() > 0) {
+				throw new EntityExistsException("重复的分类名字");
+			}
 			UserCategory userCategory = new UserCategory();
-			BeanUtils.copyProperties(userCategoryVo, userCategory);
+			BeanTools.myCopyProperties(userCategoryVo, userCategory);
 			userCategoryDao.save(userCategory);
-		}else {
-			throw new EntityExistsException();
+		} else {
+			throw new EntityNotFoundException();
 		}
-		
 	}
 	
 	@Override

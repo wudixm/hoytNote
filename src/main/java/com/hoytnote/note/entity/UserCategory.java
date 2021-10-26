@@ -1,15 +1,18 @@
 package com.hoytnote.note.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="user_category")
 public class UserCategory {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id ;
 
@@ -23,10 +26,12 @@ public class UserCategory {
 	private String properties ;
 
 	@Column(name="created_at")
-	private String createdAt ;
+	@CreationTimestamp
+	private LocalDateTime createdAt ;
 
 	@Column(name="updated_at")
-	private String updatedAt ;
+	@UpdateTimestamp
+	private LocalDateTime updatedAt ;
 
 	public UserCategory(){
 		super();
@@ -64,20 +69,31 @@ public class UserCategory {
 		this.properties = properties;
 	}
 
-	public String getCreatedAt(){
+	public LocalDateTime getCreatedAt(){
 		return this.createdAt;
 	}
 
-	public void setCreatedAt(String createdAt){
+	public void setCreatedAt(LocalDateTime createdAt){
 		this.createdAt = createdAt;
 	}
 
-	public String getUpdatedAt(){
+	public LocalDateTime getUpdatedAt(){
 		return this.updatedAt;
 	}
 
-	public void setUpdatedAt(String updatedAt){
+	public void setUpdatedAt(LocalDateTime updatedAt){
 		this.updatedAt = updatedAt;
 	}
+//
+//	@PrePersist
+//	protected void onCreate() {
+//		createdAt = new LocalDateTime();
+//	}
+//
+//	@PreUpdate
+//	protected void onUpdate() {
+//		updatedAt = new Date();
+//	}
+//
 
 }
