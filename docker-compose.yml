@@ -3,7 +3,6 @@ web:
   command: java -jar target/app.jar  >> /mnt/cv.app.task.log 2>&1
   ports:
     - "8080:8080"
-    - "3307:3306"
   volumes:
     - ".:/mnt"
   restart: always
